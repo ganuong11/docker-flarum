@@ -3,7 +3,7 @@ FROM alpine:3.16
 LABEL description="Simple forum software for building great communities" \
       maintainer="Magicalex <magicalex@mondedie.fr>"
 
-ARG VERSION=v1.3.0
+ARG VERSION=v1.8.1
 
 ENV GID=991 \
     UID=991 \
@@ -21,6 +21,7 @@ ENV GID=991 \
     FLARUM_PORT=8888
 
 RUN apk add --no-progress --no-cache \
+    bash \
     curl \
     git \
     icu-data-full \
@@ -58,6 +59,8 @@ RUN apk add --no-progress --no-cache \
   && chmod +x /usr/local/bin/composer \
   && mkdir -p /run/php /flarum/app \
   && COMPOSER_CACHE_DIR="/tmp" composer create-project flarum/flarum:$VERSION /flarum/app \
+  && cd /flarum/app \
+  && composer require flarum/extension-manager:"*" \
   && composer clear-cache \
   && rm -rf /flarum/.composer /tmp/* \
   && setcap CAP_NET_BIND_SERVICE=+eip /usr/sbin/nginx

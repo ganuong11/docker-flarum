@@ -1,4 +1,6 @@
-docker-compose.yml
 docker
 flarum.env
 test.sh
+/flarum/db/*
+/flarum/assets/*
+/flarum/storage/*
