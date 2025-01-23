@@ -4,3 +4,5 @@ test.sh
 /flarum/db/*
 /flarum/assets/*
 /flarum/storage/*
+/flarum/extensions/*
+.DS_Store
